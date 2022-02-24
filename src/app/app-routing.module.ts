@@ -1,38 +1,31 @@
-import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { Grafica1Component } from './pages/grafica1/grafica1.component';
-import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { PagesComponent } from './pages/pages.component';
-import { ProgressComponent } from './pages/progress/progress.component';
+import { NgModule } from '@angular/core';
+
+import { PagesRoutingModule } from './pages/pages.routing';
+import { AuthRoutingModule } from './auth/auth.routing';
+
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 
 const routes: Routes  = [
-  {
-    path: '',
-    component: PagesComponent,
-    children: [
-      
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'grafica1', component: Grafica1Component },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      
-      ]
-   },
-    
-
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  //PagesRoutingModule
+  //AuthRoutingModule
+  //path: '/dashboard'  PagesRounting
+  //path: '/auth'       AuthRounting
+  //path: '/medicos'    MedicoRounting
+  //path: '/compras'    ComprasRounting
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },  //tiene que estar 1ro
   { path: '**', component: NopagefoundComponent },
+
+ 
 ] 
 
 @NgModule({
-  declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    PagesRoutingModule,
+    AuthRoutingModule
   ],
   exports: [
     RouterModule
