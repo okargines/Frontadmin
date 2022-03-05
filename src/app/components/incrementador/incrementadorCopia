@@ -1,0 +1,124 @@
+<!-- <h3>
+    {{ leyenda }} - {{ progreso }}
+</h3> -->
+
+<!-- <div class="input-group">
+    <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" (click)="cambiarValor(-5)">
+        <i class="fa fa-minus"></i>
+    </button>
+  </span>
+
+    <input #txtProgress 
+            type="number" 
+            class="form-control" 
+            name="progreso" 
+            [(ngModel)]="progreso" 
+            (ngModelChange)="onChanges($event)" 
+            min="1" max="100">
+
+    <span class="input-group-btn">
+      <button class="btn btn-primary" 
+              type="button" 
+              (click)="cambiarValor(+5)">
+          <i class="fa fa-plus"></i>
+      </button>
+    </span>
+</div>   -->
+
+<div class="input-group">
+  <span class="input-group-btn">
+      <button   
+              (click)="cambiarValor(-5)"  
+               [ngClass]="btnClass"
+              type="button"><i class="fa fa-minus"></i> 
+      </button>
+  </span>
+  <input type="number" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': progreso > 100 || progreso < 0 }"
+          placeholder="Progreso"
+          (ngModelChange)="onChange($event)"
+          [(ngModel)] = "progreso"
+          min = "0"
+          max="100"
+          >
+  <span class="input-group-btn">
+      <button class="btn btn-primary" 
+              (click)="cambiarValor(5)"  
+              type="button"><i class="fa fa-plus"></i> 
+      </button>
+  </span>
+</div> 
+
+
+import { Component, 
+  Input, 
+  Output, 
+  ViewChild, 
+  EventEmitter, 
+  OnInit,
+  ElementRef } from '@angular/core';
+
+
+ngOnInit() {
+  this.btnClass = `btn ${ this.btnClass}`;
+}
+
+@ViewChild('txtProgress') txtProgress: ElementRef;
+
+@Input('nombre') leyenda: string = 'Leyenda';
+@Input() btnClass: string = "btn btn-primary" ;
+
+//Para qu el componente hijo reciba el valor desde el Padre.
+//Si no recibe valor desde el padre por DEFECTO tomara el valor de 50
+//equivalente al 50% para el progressbar.
+@Input('valor') progreso: number = 50;
+
+//Se utiliz OUTPUT para que escuche el control Progersbar
+//a cda cambio del valor del INPUT
+//@Output('actualizaValor') cambioValor: EventEmitter<number> = new EventEmitter();
+@Output('valor') valorSalida: EventEmitter<number> = new EventEmitter();
+
+onChange( nuevoValor: number ) {
+
+  // let elemHTML: any = document.getElementsByName('progreso')[0];
+
+  // console.log( this.txtProgress );
+
+  if ( nuevoValor >= 100 ) {
+    this.progreso = 100;
+  }else if ( nuevoValor <= 0 ) {
+    this.progreso = 0;
+  }else {
+    this.progreso = nuevoValor;
+  }
+
+  // elemHTML.value = this.progreso;
+  //this.txtProgress.nativeElement.value = this.progreso;
+
+  this.valorSalida.emit( this.progreso );
+
+}
+
+cambiarValor( valor: number ) {
+
+  if ( this.progreso >= 100 && valor >= 0 ) {
+    this.valorSalida.emit(100);
+    this.progreso = 100;
+    return;
+  }
+
+  if ( this.progreso <= 0 && valor < 0 ) {
+    this.valorSalida.emit(0);
+    this.progreso = 0;
+    return;
+  }
+
+  this.progreso = this.progreso + valor;
+
+  this.valorSalida.emit( this.progreso );
+
+  //this.txtProgress.nativeElement.focus();
+
+}

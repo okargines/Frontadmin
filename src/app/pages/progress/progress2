@@ -26,7 +26,8 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Barra de progreso </h4>
+                <!-- <app-incrementador (actualizaValor)="progreso1 = $event" nombre="Progress Azul" [progreso]="progreso1"></app-incrementador> -->
+                <h4 class="card-title">Barra de progreso {{ progreso1 }}</h4>
                 <div class="progress m-t-20">
                     <div 
                         class="progress-bar bg-primary progress-bar-striped active"       
@@ -38,8 +39,7 @@
                 <div class="progress m-t-20">
                     <div 
                         class="progress-bar bg-info progress-bar-striped active" 
-                        style="height:10px;" 
-                        role="progressbar" 
+                        style="height:10px;" role="progressbar" 
                         [style.width]="getProgreso2">
                     </div>
                 </div>
@@ -57,24 +57,20 @@
             <div class="card">
                 <div class="card-body">
                     <!-- (valorSalida)="cambioValorHijo( $event )    [valor]="20">  -->
-                    <h4>Progreso1 {{ progreso1 }}</h4>
                     <app-incrementador 
-                        [valor]="20"
-                        (valor)="progreso1 = $event"
-                        >
+                        (valor)="progreso1 = $event" 
+                        [valor]="20">
                     </app-incrementador>
-
                 </div>
             </div>    
         </div>
         <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <app-incrementador 
-                        (valor)="progreso2 = $event"
-                        [valor]="20"
-                        [btnClass]="'btn-info'"
-                        >
+                    <app-incrementador
+                        (valor)="progreso2 = $event" 
+                        [valor]="60"
+                        [btnClass]="'btn-info'">
                     </app-incrementador>
                 </div>
             </div>    
