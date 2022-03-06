@@ -1,17 +1,42 @@
        <div class="row">
           <div class="col-6">
-
-              <app-dona title="Ventas"
-                  [labels]="labels1"
-                  [data]="data1">
+              <app-dona charTtitle="Ventas"
+                  [chartLabels]="labels1"
+                  [chartData]="data1"
+                  chartType="doughnut">
               </app-dona>
 
             </div>
             <div class="col-6">
 
-              <app-dona title="Compras"
-                  [labels]="labels2"
-                  [data]="data2">
+              <app-dona chartTitle="Compras"
+                  [chartLabels]="labels2"
+                  [chartData]="data2"
+                  chartType="doughnut">
+              </app-dona>
+
+            </div>
+
+        </div>
+        <div class="row">
+          <div class="col-6">
+
+              <app-dona 
+                  [chartTitle]="graficos.grafico3.leyenda"
+                  [chartLabels]="graficos.grafico3.labels"
+                  [chartData]="graficos.grafico3.data"
+                  [chartType]="graficos.grafico3.type"
+                  >
+              </app-dona>
+
+            </div>
+            <div class="col-6">
+
+              <app-dona 
+                  [chartTitle]="graficos.grafico4.leyenda"
+                  [chartLabels]="graficos.grafico4.labels"
+                  [chartData]="graficos.grafico4.data"
+                  [chartType]="graficos.grafico4.type">
               </app-dona>
 
             </div>

@@ -10,15 +10,16 @@ import { MultiDataSet, Label, Color } from 'ng2-charts';
 })
 export class DonaComponent {
 
-  @Input() title:string = "Compras";
-  @Input() labels:any = ['label1','label2','label3'];
-  @Input() data:any = [];
+  @Input('chartTitle') title:string = "Compras";
+  @Input('chartLabels') labels:any = ['label1','label2','label3'];
+  @Input('chartData') data:any = [];
+  @Input('chartType') type:ChartType = "doughnut";
 
   // Doughnut
   public doughnutChartLabels: Label[] = this.labels;
   public doughnutChartData: MultiDataSet = this.data;
 
-  public doughnutChartType: ChartType = 'doughnut';
+  public doughnutChartType: ChartType = this.type;
 
   public colors: Color [] = [
     { backgroundColor: ['#6857E6','#009FEE','#F02059']}
